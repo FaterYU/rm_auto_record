@@ -7,13 +7,13 @@ RecordNode::RecordNode(const rclcpp::NodeOptions & options) : Node("rm_auto_reco
 {
   record_state_ = WAIT;
 
-  record_controller_sub_ = create_subscription<std_msgs::msg::Int16>(
+  record_controller_sub_ = create_subscription<std_msgs::msg ::String>(
     "/record_controller", 10, std::bind(&RecordNode::recordInit, this, std::placeholders::_1));
 }
 
-void RecordNode::recordInit(std_msgs::msg::Int16::SharedPtr msg)
+void RecordNode::recordInit(std_msgs::msg::String::SharedPtr msg)
 {
-  if (msg->data == 1 && record_state_ == WAIT) {
+  if (msg->data == "start" && record_state_ == WAIT) {
     record_state_ = INIT;
     auto now = std::chrono::system_clock::now();
     auto now_c = std::chrono::system_clock::to_time_t(now);
@@ -46,7 +46,7 @@ void RecordNode::recordInit(std_msgs::msg::Int16::SharedPtr msg)
       "/detector/result_img/compressed", 10,
       std::bind(&RecordNode::writeImage, this, std::placeholders::_1));
   }
-  if (msg->data == 0 && record_state_ != WAIT) {
+  if (msg->data == "stop" && record_state_ != WAIT) {
     record_state_ = WAIT;
     writer_->close();
     RCLCPP_INFO(get_logger(), "Stop recording.");

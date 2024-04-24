@@ -7,7 +7,7 @@
 #include <rosbag2_storage/serialized_bag_message.hpp>
 #include <rosbag2_storage/storage_options.hpp>
 #include <sensor_msgs/msg/compressed_image.hpp>
-#include <std_msgs/msg/int16.hpp>
+#include <std_msgs/msg/string.hpp>
 #include <string>
 
 namespace rm_auto_record
@@ -20,13 +20,13 @@ public:
 private:
   void writeImage(std::shared_ptr<rclcpp::SerializedMessage> msg);
 
-  void recordInit(std_msgs::msg::Int16::SharedPtr msg);
+  void recordInit(std_msgs::msg::String::SharedPtr msg);
 
   // std::unique_ptr<rosbag2_cpp::Writer> writer_;
   std::shared_ptr<rosbag2_cpp::writers::SequentialWriter> writer_;
 
   rclcpp::Subscription<sensor_msgs::msg::CompressedImage>::SharedPtr image_sub_;
-  rclcpp::Subscription<std_msgs::msg::Int16>::SharedPtr record_controller_sub_;
+  rclcpp::Subscription<std_msgs::msg::String>::SharedPtr record_controller_sub_;
 
   enum RecordState {
     WAIT,
