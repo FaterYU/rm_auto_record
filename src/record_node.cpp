@@ -1,3 +1,6 @@
+// Copyright (C) 2024 Zheng Yu
+// Licensed under the Apache-2.0 License.
+
 #include "rm_auto_record/record_node.hpp"
 
 namespace rm_auto_record

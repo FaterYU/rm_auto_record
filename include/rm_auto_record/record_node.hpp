@@ -1,3 +1,6 @@
+// Copyright (C) 2024 Zheng Yu
+// Licensed under the Apache-2.0 License.
+
 #ifndef RM_AUTO_RECORD__RECORD_NODE_HPP_
 #define RM_AUTO_RECORD__RECORD_NODE_HPP_
 
